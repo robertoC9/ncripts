@@ -2,13 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acceso</title>
+    <title>Acceso – Ncripts</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
+<!-- HEADER -->
+<header id="mainHeader">
+    <img src="ncripts_logo.svg" alt="Ncripts Logo" id="headerLogo">
+</header>
+
+<!-- CONTENEDOR -->
 <div class="container">
+
     <h1>Iniciar Sesión</h1>
 
     <div class="input-group">
@@ -27,14 +35,24 @@
     </div>
 
     <p id="status"></p>
+
 </div>
 
-<!-- ESTA LÍNEA ES OBLIGATORIA -->
-<script type="module" src="supabase.js"></script>
+<!-- FOOTER -->
+<footer id="mainFooter">
+    <p id="footerTime"></p>
+    <p id="footerRegion"></p>
+    <p id="footerLang"></p>
+    <p id="footerIP"></p>
+    <p id="footerSystem"></p>
+    <p id="footerVersion">Versión de la app: 1.0.0</p>
+</footer>
 
-<!-- ESTA VA DESPUÉS -->
+<script type="module" src="supabase.js"></script>
 <script type="module" src="login.js"></script>
+<script src="footer.js"></script>
 
 </body>
 </html>
+
 

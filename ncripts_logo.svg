@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0D12"/>
+      <stop offset="100%" stop-color="#10141C"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C5CFF"/>
+      <stop offset="100%" stop-color="#4FA8FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg)"/>
+
+  <!-- ICON: encrypted file — document silhouette with a keyhole cut through it -->
+  <g transform="translate(90,60)">
+    <path d="M20 0 H150 L200 50 V240 A20 20 0 0 1 180 260 H20 A20 20 0 0 1 0 240 V20 A20 20 0 0 1 20 0 Z"
+          fill="none" stroke="#E8ECF1" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M150 0 V40 A10 10 0 0 0 160 50 H200" fill="none" stroke="#E8ECF1" stroke-width="9" stroke-linejoin="round"/>
+
+    <!-- keyhole, punched through the file, in accent color -->
+    <g transform="translate(100,150)">
+      <circle r="34" fill="url(#accent)"/>
+      <path d="M-13 20 L13 20 L7 62 L-7 62 Z" fill="url(#accent)"/>
+      <circle r="12" fill="#0A0D12"/>
+    </g>
+  </g>
+
+  <!-- WORDMARK -->
+  <g transform="translate(360,150)" font-family="'JetBrains Mono','Liberation Mono','DejaVu Sans Mono',monospace" font-weight="700">
+    <text x="0" y="0" font-size="108" letter-spacing="1">
+      <tspan fill="url(#accent)">N</tspan><tspan fill="#E8ECF1">cri</tspan><tspan fill="#E8ECF1">p</tspan><tspan fill="url(#accent)">T</tspan><tspan fill="#E8ECF1">s</tspan>
+    </text>
+    <text x="4" y="46" font-size="26" letter-spacing="7" fill="#6B7280" font-weight="500">ENCRYPTED FILE SYSTEMS</text>
+  </g>
+</svg>

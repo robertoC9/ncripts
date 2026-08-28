@@ -213,3 +213,24 @@ logoutBtn.onclick = async () => {
     await supabase.auth.signOut();
     window.location.href = "login.html";
 };
+ 
+function updateFooterTime() {
+    const footerTime = document.getElementById("footerTime");
+    if (!footerTime) return;
+
+    const now = new Date();
+
+    // Hora local según la región del usuario
+    const formatted = now.toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "medium"
+    });
+
+    footerTime.textContent = `Hora local: ${formatted}`;
+}
+
+// Actualiza cada segundo
+setInterval(updateFooterTime, 1000);
+
+// Ejecuta al cargar la página
+updateFooterTime();

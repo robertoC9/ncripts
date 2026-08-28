@@ -1,0 +1,29 @@
+<svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6A4FE0"/>
+      <stop offset="100%" stop-color="#2F7FE0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" fill="#F7F7F9"/>
+
+  <g transform="translate(90,60)">
+    <path d="M20 0 H150 L200 50 V240 A20 20 0 0 1 180 260 H20 A20 20 0 0 1 0 240 V20 A20 20 0 0 1 20 0 Z"
+          fill="none" stroke="#12141A" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M150 0 V40 A10 10 0 0 0 160 50 H200" fill="none" stroke="#12141A" stroke-width="9" stroke-linejoin="round"/>
+
+    <g transform="translate(100,150)">
+      <circle r="34" fill="url(#accent2)"/>
+      <path d="M-13 20 L13 20 L7 62 L-7 62 Z" fill="url(#accent2)"/>
+      <circle r="12" fill="#F7F7F9"/>
+    </g>
+  </g>
+
+  <g transform="translate(360,150)" font-family="'JetBrains Mono','Liberation Mono','DejaVu Sans Mono',monospace" font-weight="700">
+    <text x="0" y="0" font-size="108" letter-spacing="1">
+      <tspan fill="url(#accent2)">N</tspan><tspan fill="#12141A">cri</tspan><tspan fill="#12141A">p</tspan><tspan fill="url(#accent2)">T</tspan><tspan fill="#12141A">s</tspan>
+    </text>
+    <text x="4" y="46" font-size="26" letter-spacing="7" fill="#8A8F98" font-weight="500">ENCRYPTED FILE SYSTEMS</text>
+  </g>
+</svg>

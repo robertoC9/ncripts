@@ -2,42 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ncripts – Encriptador Seguro</title>
+    <title>Dashboard – Ncripts</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header id="mainHeader">
     <img src="ncripts_logo.svg" alt="Ncripts Logo" id="headerLogo">
 </header>
 
-<!-- CONTENEDOR -->
 <div class="container">
 
-    <h1>Encriptador de Archivos</h1>
+    <h1>Archivos Encriptados</h1>
+    <p class="subtitle">Lista de archivos almacenados en Supabase Storage</p>
 
-    <p class="subtitle">
-        Protege tus documentos con encriptación avanzada AES-256.
-    </p>
-
-    <div class="input-group">
-        <label>Selecciona un archivo</label>
-        <input type="file" id="fileInput">
+    <div id="fileList" class="file-list">
+        <!-- Aquí se cargan los archivos -->
     </div>
-
-    <div class="buttons">
-        <button class="primary" id="encryptBtn">Encriptar</button>
-        <button class="secondary" id="decryptBtn">Desencriptar</button>
-    </div>
-
-    <p id="status"></p>
 
 </div>
 
-<!-- FOOTER -->
 <footer id="mainFooter">
     <p id="footerTime"></p>
     <p id="footerRegion"></p>
@@ -48,11 +34,8 @@
 </footer>
 
 <script type="module" src="supabase.js"></script>
-<script type="module" src="app.js"></script>
+<script type="module" src="dashboard.js"></script>
 <script src="footer.js"></script>
 
 </body>
 </html>
-
-
-
