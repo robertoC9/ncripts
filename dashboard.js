@@ -1,5 +1,7 @@
 import { supabase } from "./supabase.js";
 
+const BUCKET_NAME = "encrypted-files";
+
 /* ------------------------------
    Cargar archivos del bucket
 ---------------------------------*/
@@ -8,12 +10,20 @@ async function loadFiles() {
     const fileList = document.getElementById("fileList");
     fileList.innerHTML = "<p>Cargando archivos...</p>";
 
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError || !userData.user) {
+        window.location.replace("login.html");
+        return;
+    }
+
+    const userPath = `${userData.user.id}/`;
     const { data, error } = await supabase.storage
-        .from("encrypted-files")
-        .list("", { limit: 100 });
+        .from(BUCKET_NAME)
+        .list(userPath, { limit: 100 });
 
     if (error) {
-        fileList.innerHTML = "<p>Error al cargar archivos.</p>";
+        console.error(error);
+        fileList.innerHTML = `<p>Error al cargar archivos: ${error.message}</p>`;
         return;
     }
 
@@ -37,10 +47,12 @@ async function loadFiles() {
         `;
 
         // Descargar archivo
-        item.querySelector(".download").onclick = () => downloadFile(file.name);
+        const filePath = `${userPath}${file.name}`;
+
+        item.querySelector(".download").onclick = () => downloadFile(filePath, file.name);
 
         // Eliminar archivo
-        item.querySelector(".delete").onclick = () => deleteFile(file.name);
+        item.querySelector(".delete").onclick = () => deleteFile(filePath);
 
         fileList.appendChild(item);
     });
@@ -50,13 +62,14 @@ async function loadFiles() {
    Descargar archivo
 ---------------------------------*/
 
-async function downloadFile(filename) {
+async function downloadFile(filePath, filename) {
     const { data, error } = await supabase.storage
-        .from("encrypted-files")
-        .download(filename);
+        .from(BUCKET_NAME)
+        .download(filePath);
 
     if (error) {
-        alert("Error al descargar archivo");
+        console.error(error);
+        alert(`Error al descargar archivo: ${error.message}`);
         return;
     }
 
@@ -72,17 +85,19 @@ async function downloadFile(filename) {
    Eliminar archivo
 ---------------------------------*/
 
-async function deleteFile(filename) {
+async function deleteFile(filePath) {
+    const filename = filePath.split("/").pop();
     const confirmDelete = confirm(`¿Eliminar archivo "${filename}"?`);
 
     if (!confirmDelete) return;
 
     const { error } = await supabase.storage
-        .from("encrypted-files")
-        .remove([filename]);
+        .from(BUCKET_NAME)
+        .remove([filePath]);
 
     if (error) {
-        alert("Error al eliminar archivo");
+        console.error(error);
+        alert(`Error al eliminar archivo: ${error.message}`);
         return;
     }
 
