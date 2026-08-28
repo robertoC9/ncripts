@@ -1,5 +1,6 @@
 import { supabase } from './supabase.js';
 
+const BUCKET_NAME = "encrypted-files";
 const fileInput = document.getElementById("fileInput");
 const passwordInput = document.getElementById("passwordInput");
 const status = document.getElementById("status");
@@ -46,20 +47,26 @@ async function getKey(password, salt) {
    SUBIR ARCHIVO AL BUCKET
 ============================ */
 async function uploadEncryptedFile(fileBlob, filename) {
-    const { data: userData } = await supabase.auth.getUser();
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !userData.user) {
+        status.textContent = "Tu sesión expiró. Inicia sesión nuevamente.";
+        return null;
+    }
+
     const userId = userData.user.id;
 
     const filePath = `${userId}/${filename}`;
 
     const { data, error } = await supabase.storage
-        .from("ENCRYPTED-FILES")
+        .from(BUCKET_NAME)
         .upload(filePath, fileBlob, {
             upsert: true
         });
 
     if (error) {
         console.error(error);
-        status.textContent = "Error subiendo archivo.";
+        status.textContent = `Error subiendo archivo: ${error.message}`;
         return null;
     }
 
@@ -72,7 +79,7 @@ async function uploadEncryptedFile(fileBlob, filename) {
 ============================ */
 async function downloadEncryptedFile(filePath) {
     const { data, error } = await supabase.storage
-        .from("ENCRYPTED-FILES")
+        .from(BUCKET_NAME)
         .download(filePath);
 
     if (error) {
@@ -89,10 +96,11 @@ async function downloadEncryptedFile(filePath) {
 ============================ */
 async function listUserFiles() {
     const { data: userData } = await supabase.auth.getUser();
+    if (!userData.user) return [];
     const userId = userData.user.id;
 
     const { data, error } = await supabase.storage
-        .from("ENCRYPTED-FILES")
+        .from(BUCKET_NAME)
         .list(userId + "/");
 
     if (error) {
