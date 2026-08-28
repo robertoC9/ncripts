@@ -134,7 +134,9 @@ document.getElementById("encryptBtn").onclick = async () => {
     const encryptedName = file.name + ".enc";
 
     // SUBIR AL BUCKET
-    await uploadEncryptedFile(blob, encryptedName);
+    const uploadedPath = await uploadEncryptedFile(blob, encryptedName);
+
+    if (!uploadedPath) return;
 
     // DESCARGAR LOCAL (opcional)
     download(blob, encryptedName);
