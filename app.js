@@ -9,9 +9,9 @@ const logoutBtn = document.getElementById("logoutBtn");
    PROTEGER LA PÁGINA
 ============================ */
 (async () => {
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) {
-        window.location.href = "login.html";
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) {
+        window.location.replace("login.html");
     }
 })();
 
@@ -209,10 +209,12 @@ function download(blob, filename) {
 /* ============================
    LOGOUT
 ============================ */
-logoutBtn.onclick = async () => {
-    await supabase.auth.signOut();
-    window.location.href = "login.html";
-};
+if (logoutBtn) {
+    logoutBtn.onclick = async () => {
+        await supabase.auth.signOut();
+        window.location.href = "login.html";
+    };
+}
  
 function updateFooterTime() {
     const footerTime = document.getElementById("footerTime");

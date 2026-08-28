@@ -141,6 +141,44 @@ button.secondary:hover {
     box-shadow: 0 0 10px #555555;
 }
 
+.dashboard-link {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 24px;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.dashboard-link:hover {
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.dashboard-link:focus {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+.logout-button {
+    width: auto;
+    margin-top: 16px;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+}
+
+.logout-button:hover {
+    border-color: var(--focus-ring);
+    color: var(--text-main);
+    box-shadow: 0 0 10px var(--focus-ring);
+}
+
 /* ------------------------------
    FOOTER AVANZADO
 ---------------------------------*/
