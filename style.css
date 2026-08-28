@@ -215,6 +215,34 @@ button.secondary:hover {
     margin: 4px 0;
 }
 
+.footer-security {
+    margin-top: 12px;
+}
+
+.securityLink {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--focus-ring);
+    border-radius: 8px;
+    color: var(--focus-ring);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.securityLink:hover,
+.securityLink:focus {
+    background: var(--focus-ring);
+    color: var(--bg-dark);
+    box-shadow: 0 0 12px var(--focus-ring);
+}
+
+.securityLink:focus {
+    outline: 3px solid var(--accent-glow);
+    outline-offset: 3px;
+}
+
 @keyframes footerGlow {
     from { text-shadow: 0 0 4px #4f8cff; }
     to { text-shadow: 0 0 12px #7aa7ff; }
