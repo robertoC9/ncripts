@@ -11,7 +11,50 @@ const getRedirectUrl = () => {
         return `${origin}/login.html`;
     }
 
-    return "http://localhost:8000/login.html";
+    return "https://ncripts.org/login.html";
+};
+
+const handleAuthRedirect = async () => {
+    const { data, error } = await supabase.auth.getSession();
+
+    if (!error && data.session) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    const hash = window.location.hash || "";
+
+    if (params.get("type") === "signup" || hash.includes("type=signup") || params.get("access_token")) {
+        status.textContent = "Correo verificado. Ya puedes iniciar sesión.";
+    }
+};
+
+const resendVerificationEmail = async () => {
+    const email = emailInput.value.trim();
+
+    if (!email) {
+        status.textContent = "Introduce tu email para reenviar la verificación.";
+        return;
+    }
+
+    status.textContent = "Enviando correo de verificación...";
+
+    const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: {
+            emailRedirectTo: getRedirectUrl()
+        }
+    });
+
+    if (error) {
+        status.textContent = error.message;
+        return;
+    }
+
+    status.textContent = "Se ha reenviado el correo de verificación.";
 };
 
 document.getElementById("registerBtn").onclick = async () => {
@@ -44,6 +87,8 @@ document.getElementById("registerBtn").onclick = async () => {
     status.textContent = "Usuario registrado. Revisa tu correo de verificación.";
 };
 
+handleAuthRedirect();
+
 document.getElementById("loginBtn").onclick = async () => {
     const email = emailInput.value.trim();
     const password = passInput.value.trim();
@@ -61,3 +106,5 @@ document.getElementById("loginBtn").onclick = async () => {
         window.location.href = "index.html";
     }
 };
+
+document.getElementById("resendBtn").onclick = resendVerificationEmail;
